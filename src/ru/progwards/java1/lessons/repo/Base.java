@@ -54,7 +54,7 @@ public class Base {
         calculation();
         calculation(11, 25, 410);
         calculation(100, 9, 98);
-        calculation(100, 9, 98);
+
 
     }
 
