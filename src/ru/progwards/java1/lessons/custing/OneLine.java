@@ -2,7 +2,7 @@ package ru.progwards.java1.lessons.custing;
 
 public class OneLine {
     public static String strValue(String value) {
-        return "Передана строка со значением " + value;
+        return "Передана строка со значением " + "\""+value + "\""; //
     }
     public static String intValue(String variable,  int value){
         return "Значение "+variable+" равно "+value;
@@ -15,7 +15,7 @@ public class OneLine {
     }
 
     public static void main(String[] args) {
-        System.out.println(strValue("value"));
+        System.out.println(strValue("Лошадка, везущая хворосту воз."));
         System.out.println(intValue("radius",2));
         System.out.println( square(3));
         System.out.println(sum(10,4));

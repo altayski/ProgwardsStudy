@@ -13,7 +13,7 @@ public class Figures {
         double p = (k+k+k)/2.0;
         return Math.sqrt(p*((p-k)*(p-k)*(p-k)));
     }
-    public static double squareVsTriangle(double p){//исправлена опечатка squareVsTraiange
+    public static double squareVsTraiange(double p){
         return square(p)/triangle(p);
     }
     public static double squareVsCircle(double p){
@@ -25,7 +25,7 @@ public class Figures {
 
     public static void main(String[] args) {
         System.out.println(triangle(12.75));
-        System.out.println(squareVsTriangle(4.0));
+        System.out.println(squareVsTraiange(4.0));
         System.out.println(squareVsCircle(3.0));
         System.out.println(triangleVsCircle(6.0));
     }
