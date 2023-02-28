@@ -16,10 +16,8 @@ public class Figures {
 
     public static Double triangle(double k) {
         double p = (k + k + k) / 2;
-        double result = Math.sqrt(p * ((p - k) * (p - k) * (p - k)));
-        BigDecimal bd = new BigDecimal(result);
-        BigDecimal roundOff = bd.setScale(11, RoundingMode.FLOOR);
-        return roundOff.doubleValue();
+        return Math.sqrt(p * ((p - k) * (p - k) * (p - k)));
+
     }
 
     public static double squareVsTraiange(double p) {
@@ -27,10 +25,8 @@ public class Figures {
     }
 
     public static double squareVsCircle(double p) {
-        double result = square(p) / circle(p);
-        BigDecimal bd = new BigDecimal(result);
-        BigDecimal floor = bd.setScale(16, RoundingMode.FLOOR);
-        return floor.doubleValue();
+        return  square(p) / circle(p);
+
     }
 
     public static double triangleVsCircle(double p) {
