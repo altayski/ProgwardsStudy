@@ -1,12 +1,11 @@
 package ru.progwards.java1.lessons.custing;
 
 
-
 public class Figures {
     public static final double PI = 3.14;
 
     public static double circle(double r) {
-        return PI * r * r;
+        return r * r * PI;
     }
 
     public static double square(double n) {
@@ -14,7 +13,7 @@ public class Figures {
     }
 
     public static Double triangle(double k) {
-        double p = (k+k+k) / 2;
+        double p = (k + k + k) / 2;
         return Math.sqrt(p * (p - k) * (p - k) * (p - k));
     }
 
@@ -35,6 +34,6 @@ public class Figures {
         System.out.println(triangle(99.68727114192085));
         System.out.println(squareVsTraiange(4.0));
         System.out.println(squareVsCircle(20.66909005373059));
-        System.out.println(triangleVsCircle(88.95394611900252));
+        System.out.println(circle(63.53645536658023));
     }
 }
