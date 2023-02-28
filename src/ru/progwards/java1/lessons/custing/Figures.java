@@ -1,7 +1,6 @@
 package ru.progwards.java1.lessons.custing;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+
 
 public class Figures {
     public static final double PI = 3.14;
@@ -15,9 +14,8 @@ public class Figures {
     }
 
     public static Double triangle(double k) {
-        double p = (k + k + k) / 2;
-        return Math.sqrt(p * ((p - k) * (p - k) * (p - k)));
-
+        double p = (k+k+k) / 2;
+        return Math.sqrt(p * (p - k) * (p - k) * (p - k));
     }
 
     public static double squareVsTraiange(double p) {
@@ -25,7 +23,7 @@ public class Figures {
     }
 
     public static double squareVsCircle(double p) {
-        return  square(p) / circle(p);
+        return square(p) / circle(p);
 
     }
 
@@ -37,6 +35,6 @@ public class Figures {
         System.out.println(triangle(99.68727114192085));
         System.out.println(squareVsTraiange(4.0));
         System.out.println(squareVsCircle(20.66909005373059));
-        System.out.println(triangleVsCircle(6.0));
+        System.out.println(triangleVsCircle(88.95394611900252));
     }
 }
