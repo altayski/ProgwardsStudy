@@ -35,5 +35,6 @@ public class Figures {
         System.out.println(squareVsTraiange(4.0));
         System.out.println(squareVsCircle(20.66909005373059));
         System.out.println(circle(63.53645536658023));
+        System.out.println(circle(63.53645536658023));
     }
 }
