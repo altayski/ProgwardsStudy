@@ -15,15 +15,14 @@ public class GoldenFibo {
     }
 
     public static boolean isGoldenTriangle(int a, int b, int c) {
-        boolean isOk = true;
         if (a == b && ((double) a / c) > 1.61703 && ((double) a / c) < 1.61903) {
-            return isOk;
+            return true;
         }
         if (b == c && ((double) b / a) > 1.61703 && ((double) b / a) < 1.61903) {
-            return isOk;
+            return true;
         }
         if (a == c && ((double) a / b) > 1.61703 && ((double) a / b) < 1.61903) {
-            return isOk;
+            return true;
         }
         return false;
     }
