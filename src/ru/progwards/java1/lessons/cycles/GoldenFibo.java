@@ -5,6 +5,7 @@ public class GoldenFibo {
         int num1Start = 1;
         int num2Start = 1;
         if (n == 1) return num1Start;
+        if (n == 2) return num2Start;
         int fiboNum = 0;
         for (int i = 3; i <= n; i++) {
             fiboNum = num1Start + num2Start;
