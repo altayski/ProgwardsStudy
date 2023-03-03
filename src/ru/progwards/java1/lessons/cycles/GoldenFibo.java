@@ -4,6 +4,7 @@ public class GoldenFibo {
     public static int fiboNumber(int n) {
         int num1Start = 1;
         int num2Start = 1;
+        if (n == 1) return num1Start;
         int fiboNum = 0;
         for (int i = 3; i <= n; i++) {
             fiboNum = num1Start + num2Start;
@@ -28,13 +29,14 @@ public class GoldenFibo {
     }
 
     public static void main(String[] args) {
-        for (int i = 3; i <=15; i++) {
+        System.out.println(fiboNumber(2));
+        for (int i = 3; i <= 15; i++) {
             System.out.print(fiboNumber(i) + " ");
         }
         System.out.println();
         for (int i = 3; i < 15; i++)
-                System.out.print(isGoldenTriangle(fiboNumber(i), fiboNumber(i), fiboNumber(i-1))+" ");
-        }
+            System.out.print(isGoldenTriangle(fiboNumber(i), fiboNumber(i), fiboNumber(i - 1)) + " ");
     }
+}
 
 
