@@ -4,8 +4,6 @@ public class ComplexNum {
     int a;
     int b;
 
-    int i;
-
     public ComplexNum(int a, int b) {
         this.a = a;
         this.b = b;
@@ -13,9 +11,7 @@ public class ComplexNum {
 
     @Override
     public String toString() {
-        String aVal = Integer.toString(a);
-        String bVal = Integer.toString(b);
-        return aVal + "+" + bVal + "i";
+        return a + "+" + b + "i";
     }
     public ComplexNum add(ComplexNum num){
 

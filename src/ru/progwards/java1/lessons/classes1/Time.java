@@ -16,14 +16,18 @@ public class Time {
     public String toString() {
         String hour;
         String second;
+        String minut;
         if (hours < 10 && hours >= 0) {
             hour = "0" + hours;
-        } else hour = String.valueOf(hours);
+        } else hour = "" + hours;
+        if (minutes >= 0 && minutes < 10) {
+            minut = "0" + minutes;
+        } else minut = "" + minutes;
 
         if (seconds < 10 && seconds >= 0) {
             second = "0" + seconds;
-        } else second = String.valueOf(seconds);
-        return "" + hour + ":" + minutes + ":" + second + "";
+        } else second = "" + seconds;
+        return hour + ":" + minut + ":" + second;
     }
 
     public int toSeconds() {
@@ -37,7 +41,7 @@ public class Time {
     }
 
     public static void main(String[] args) {
-        Time time = new Time(1, 30, 5);
+        Time time = new Time(1, 3, 5);
         Time time1 = new Time(1, 25, 5);
         System.out.println(time);
         System.out.println(time1.secondsBetween(time));

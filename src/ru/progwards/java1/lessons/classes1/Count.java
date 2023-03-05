@@ -25,11 +25,7 @@ public class Count {
     }
     public static void main(String[] args) {
         Count count1 = new Count(10);
-        while (true) {
-            if (count1.dec()) {
-                System.out.println("count равен 0");
-                break;
-            }
-        }
+        while(!count1.dec()) {}
+            System.out.println("count равен 0");
     }
 }
