@@ -1,6 +1,6 @@
 package ru.progwards.java1.lessons.useclasses;
 
-import ru.progwards.java1.lessons.classes1.ComplexNum;
+
 
 public class ComplexNumTest {
     public static void main(String[] args) {
