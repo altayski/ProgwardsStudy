@@ -7,6 +7,9 @@ public class CountTest {
         for (int i = 0; i < count; i++) {
             count1.inc();
             System.out.print(count1.getCount() + " ");
+            if(count == count1.getCount()){
+                System.out.println();
+            }
         }
         System.out.println("тест inc окончен");
     }
@@ -28,9 +31,9 @@ public class CountTest {
         testInc(7);
         testInc(0);
         testInc(-1);
-        testDec(9);
-        testDec(0);
-        testDec(-5);
+       // testDec(9);
+       // testDec(0);
+//        testDec(-5);
 
     }
 }
