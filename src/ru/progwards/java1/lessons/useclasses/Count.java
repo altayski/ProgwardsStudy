@@ -1,9 +1,9 @@
-package ru.progwards.java1.lessons.classes1;
+package ru.progwards.java1.lessons.useclasses;
 
 public class Count {
     int count;
 
-   public Count() {
+    Count() {
         count = 0;
     }
 
@@ -25,7 +25,9 @@ public class Count {
     }
     public static void main(String[] args) {
         Count count1 = new Count(10);
-        while(!count1.dec()) {}
+        while(!count1.dec()) {
+            System.out.print(count1.getCount()+" ");
+        }
             System.out.println("count равен 0");
     }
 }
