@@ -28,32 +28,35 @@ public class ZonedTime extends Time {
 
 
         if (this.getTimeZone() == null && time.getTimeZone() != null) {
-            timeCorrection = time.getTimeZone().hours * 3600 + time.getTimeZone().minutes * 60;
+            timeCorrection = Math.abs(time.getTimeZone().hours * 3600 + time.getTimeZone().minutes * 60);
 
         } else if (this.getTimeZone() != null && time.getTimeZone() == null) {
-            timeCorrection = this.getTimeZone().hours * 3600 + this.getTimeZone().minutes * 60;
+            timeCorrection = Math.abs(this.getTimeZone().hours * 3600 + this.getTimeZone().minutes * 60);
 
         } else if (this.getTimeZone() != null & time.getTimeZone() != null) {
-            timeCorrection = this.getTimeZone().hours * 3600 + this.getTimeZone().minutes * 60 + time.getTimeZone().hours * 3600 + time.getTimeZone().minutes * 60;
+            timeCorrection = Math.abs(this.getTimeZone().hours * 3600 + this.getTimeZone().minutes * 60 + time.getTimeZone().hours * 3600 + time.getTimeZone().minutes * 60);
         }
 
         return timeTosec + timeCorrection;
     }
 
     public static void main(String[] args) {
-
-        ZonedTime zt1 = new ZonedTime(8, 40, 55, new TimeZone(0, 28));
-        Time t1 = new Time(18, 22, 23);
+        ZonedTime zt1 = new ZonedTime(5, 36, 19, new TimeZone(-1, 53));
+         Time t1 = new Time(5, 5, 14);
         System.out.println(zt1.secondsBetween(t1));
 
-
-        ZonedTime zt2 = new ZonedTime(4, 6, 44, new TimeZone(-2, 58));
-        Time t2 = new Time(21, 2, 7);
-
-        System.out.println(zt2.secondsBetween(t2));
-
-        ZonedTime zt3 = new ZonedTime(4, 51, 3, new TimeZone(-1));
-        ZonedTime zt4 = new ZonedTime(9, 11, 44, new TimeZone(-2));
-        System.out.println(zt3.secondsBetween(zt4));
+//        ZonedTime zt1 = new ZonedTime(8, 40, 55, new TimeZone(0, 28));
+//        Time t1 = new Time(18, 22, 23);
+//        System.out.println(zt1.secondsBetween(t1));
+//
+//
+//        ZonedTime zt2 = new ZonedTime(4, 6, 44, new TimeZone(-2, 58));
+//        Time t2 = new Time(21, 2, 7);
+//
+//        System.out.println(zt2.secondsBetween(t2));
+//
+//        ZonedTime zt3 = new ZonedTime(4, 51, 3, new TimeZone(-1));
+//        ZonedTime zt4 = new ZonedTime(9, 11, 44, new TimeZone(-2));
+//        System.out.println(zt3.secondsBetween(zt4));
     }
 }
