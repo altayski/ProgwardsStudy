@@ -7,10 +7,6 @@ public class DIntArray {
         array = new int[0];
     }
 
-    public DIntArray(int[] array) {
-        this.array = array;
-    }
-
     public void add(int num) {//добавляет элемент num  в конец массива array
         int[] arrayCopy = new int[array.length + 1];
         System.arraycopy(array, 0, arrayCopy, 0, array.length);
@@ -25,6 +21,7 @@ public class DIntArray {
         for (int i = pos; i < array.length; i++) {
             arrayInsert[++pos] = array[i];
         }
+        array = arrayInsert;
     }
 
     public void atDelete(int pos) {
@@ -33,6 +30,7 @@ public class DIntArray {
         for (int i = pos + 1; i < array.length; i++) {
             arrayDel[pos++] = array[i];
         }
+        array=arrayDel;
     }
 
     public int at(int pos) {
@@ -40,13 +38,13 @@ public class DIntArray {
         if (pos < array.length) {
             for (int i = 0; i < array.length; i++) {
                 element = array[pos];
+                break;
             }
         }
         return element;
     }
 
     public static void main(String[] args) {
-
 
         DIntArray dIntArray1 = new DIntArray();
 
@@ -57,16 +55,13 @@ public class DIntArray {
         dIntArray1.add(-78);
         dIntArray1.add(40);
         dIntArray1.add(58);
-        System.out.println(dIntArray1.at(0));
-        //  dIntArray1.array = new int[5];
-        //dIntArray1.atInsert(5,3);
+        System.out.println("Третий элемент перед вставкой: "+dIntArray1.at(3));
+        dIntArray1.atInsert(3,1000);
+        System.out.println("Третий элемент после вставки: "+dIntArray1.at(3));
 
+        System.out.println("Пятый элемент перед удалением: "+dIntArray1.at(5));
+        dIntArray1.atDelete(5);
+        System.out.println("Пятый элемент после удаления: "+dIntArray1.at(5));
 
-        //DIntArray dIntArray = new DIntArray(new int[]{82,1,2,2,4,5,6});
-//        System.out.println( dIntArray.at(0));
-         //dIntArray.atInsert(3, 10);
-         //dIntArray1.add(1);
-        // dIntArray.add(6);
-        //dIntArray.atDelete(2);
     }
 }
