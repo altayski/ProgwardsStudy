@@ -14,7 +14,7 @@ public class DIntArray {
         array = arrayCopy;
     }
 
-    public void atInsert(int pos, int num) {
+    public void atInsert(int pos, int num) { //вставка элемента на определенную позицию
         int[] arrayInsert = new int[array.length + 1];
         System.arraycopy(array, 0, arrayInsert, 0, pos);
         arrayInsert[pos] = num;
@@ -24,7 +24,7 @@ public class DIntArray {
         array = arrayInsert;
     }
 
-    public void atDelete(int pos) {
+    public void atDelete(int pos) { //удаление элемента с позиции
         int[] arrayDel = new int[array.length - 1];
         System.arraycopy(array, 0, arrayDel, 0, pos);
         for (int i = pos + 1; i < array.length; i++) {
@@ -34,15 +34,8 @@ public class DIntArray {
     }
 
     public int at(int pos) {
-        int element = 0;
-        if (pos < array.length) {
-            for (int i = 0; i < array.length; i++) {
-                element = array[pos];
-                break;
-            }
+               return array[pos];
         }
-        return element;
-    }
 
     public static void main(String[] args) {
 
