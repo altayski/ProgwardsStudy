@@ -21,8 +21,11 @@ public class Matrix {
 
     public int maxInCol(int num) {
         int max = Integer.MIN_VALUE;
+
         for (int i = 0; i < matrix.length; i++) {
+
             if (matrix[i].length - 1 < num) continue;
+
             if (max < matrix[i][num]) {
                 max = matrix[i][num];
             }
@@ -33,8 +36,8 @@ public class Matrix {
     public int max() {
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < matrix.length; i++) {
-            if (maxInCol(i) > max) {
-                max = maxInCol(i);
+            if (maxInRow(i) > max) {
+                max = maxInRow(i);
             }
         }
         return max;
@@ -69,19 +72,19 @@ public class Matrix {
         int[][] mat = {{1, 2, 4},
                        {4, 5,-6},
                        {7, 8, 6},
-                       {8, 9, 10}};
+                       {8, 9, 12}};
 
         Matrix martix = new Matrix(mat);
       //  System.out.println("Максимальный элемент в строке массива " + martix.maxInRow(2));
        // System.out.println("Максимальный элемент в столбце массива " + martix.maxInCol(2));
-       // System.out.println("Максимальный элемент в массиве " + martix.max());
+        System.out.println("Максимальный элемент в массиве " + martix.max());
         //System.out.println(martix.isMatrix());
-       int[][] afterRotate =  martix.transposition();
-        for (int i = 0; i < afterRotate.length; i++) {
-            for (int j = 0; j < afterRotate.length; j++) {
-                System.out.print(afterRotate[i][j]+" ");
-            }
-            System.out.println();
-        }
+//       int[][] afterRotate =  martix.transposition();
+//        for (int i = 0; i < afterRotate.length; i++) {
+//            for (int j = 0; j < afterRotate.length; j++) {
+//                System.out.print(afterRotate[i][j]+" ");
+//            }
+//            System.out.println();
+//        }
     }
 }
