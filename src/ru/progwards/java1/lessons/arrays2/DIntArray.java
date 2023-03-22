@@ -36,13 +36,10 @@ public class DIntArray {
     public int at(int pos) {
         int element = 0;
         if (pos < array.length) {
-            for (int i = 0; i < array.length; i++) {
                 element = array[pos];
-                break;
             }
-        }
         return element;
-    }
+        }
 
     public static void main(String[] args) {
 
