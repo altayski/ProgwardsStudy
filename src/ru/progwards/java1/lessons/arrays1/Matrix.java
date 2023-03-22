@@ -68,12 +68,12 @@ public class Matrix {
     public static void main(String[] args) {
         int[][] mat = {{1, 2, 4},
                        {4, 5,-6},
-                       {7, 8,6 },
-                      {10,11,-7}};
+                       {7, 8, 6},
+                       {8, 9, 10}};
 
         Matrix martix = new Matrix(mat);
       //  System.out.println("Максимальный элемент в строке массива " + martix.maxInRow(2));
-        System.out.println("Максимальный элемент в столбце массива " + martix.maxInCol(2));
+       // System.out.println("Максимальный элемент в столбце массива " + martix.maxInCol(2));
        // System.out.println("Максимальный элемент в массиве " + martix.max());
         //System.out.println(martix.isMatrix());
        int[][] afterRotate =  martix.transposition();
