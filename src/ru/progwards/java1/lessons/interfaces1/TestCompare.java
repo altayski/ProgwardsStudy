@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class TestCompare {
     public static void main(String[] args) {
         Animal[] animals = {
-                new Cow("Пестушка", 350),
+                new Cow("Пеструшка", 350),
                 new Cow("Рыжая", 250),
                 new Duck("Даша", 3),
                 new Duck("Маша", 3.5),
