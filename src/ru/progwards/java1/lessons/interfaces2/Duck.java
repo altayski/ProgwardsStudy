@@ -1,7 +1,6 @@
 package ru.progwards.java1.lessons.interfaces2;
 
 
-
 public class Duck extends Animal {
     @Override
     public Color getColor(){
