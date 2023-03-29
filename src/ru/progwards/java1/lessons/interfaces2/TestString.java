@@ -6,9 +6,9 @@ public class TestString {
     }
 
     public static void main(String[] args) {
-        print(new Cow("Пеструшка", 270));
-        print(new Duck("Даша", 3.3));
-        print(new Hamster("Поликарп",0.32));
+        print(new Cow("Пеструшка"));
+        print(new Duck("Даша"));
+        print(new Hamster("Поликарп"));
         print(new Time(1,12,55));
         print(new ComplexNum(22,5));
 
