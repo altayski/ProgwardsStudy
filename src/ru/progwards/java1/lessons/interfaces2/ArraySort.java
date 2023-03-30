@@ -19,7 +19,9 @@ public class ArraySort {
         Car lC = new Car(2700);
         Car oka = new Car(800);
         Car sub = new Car(1150);
-        CompareWeight[] compareWeights = {zil, uaz, lC, oka, sub};
+        Cow burenka = new Cow("Burenka", 350);
+        Hamster hamster = new Hamster("Polykarp", 0.37);
+        CompareWeight[] compareWeights = {hamster, zil, uaz, lC, oka, sub, burenka};
         sort(compareWeights);
         for(CompareWeight value : compareWeights){
             System.out.println(value);
