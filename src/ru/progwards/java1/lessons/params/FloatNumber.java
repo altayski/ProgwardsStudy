@@ -95,25 +95,25 @@ public class FloatNumber {
     }
 
     double toDouble() {
-        double todouble=1;
-        if(exp<0){
-            while(exp !=0){
-                todouble =  todouble /10.0;
-                        exp++;
+        double todouble = 1;
+        if (exp < 0) {
+            while (exp != 0) {
+                todouble = todouble / 10.0;
+                exp++;
             }
         }
-        if(exp>0){
-            while(exp !=0){
-                todouble = todouble*10.0;
+        if (exp > 0) {
+            while (exp != 0) {
+                todouble = todouble * 10.0;
                 exp--;
             }
         }
-       double res = mantissa * todouble;
-        return  Math.floor(res*1000000)/1000000;
+        double res = mantissa * todouble;
+         return Math.floor(res * 1000) / 1000;
 
     }
 
-    void  fromDouble(double num) {
+    void fromDouble(double num) {
         int index = 0;
         String valueOf = String.valueOf(num);
         if (valueOf.startsWith("-")) {
@@ -152,14 +152,14 @@ public class FloatNumber {
     }
 
     FloatNumber add(FloatNumber num) {
-        boolean signF = this.sign&& num.sign;
+        boolean signF = this.sign && num.sign;
         double res;
         double x = this.toDouble();
         double y = num.toDouble();
-        if(!signF){
-             res = x-y;
+        if (!signF) {
+            res = x - y;
         } else
-         res = x + y;
+            res = x + y;
         FloatNumber result = new FloatNumber();
         result.fromDouble(res);
         return result;
@@ -172,31 +172,33 @@ public class FloatNumber {
 
         return a.add((b));
     }
+
     public static void main(String[] args) {
         FloatNumber fl = new FloatNumber();
-        System.out.println("Проба toString "+new FloatNumber(true, 645602,3));
-        FloatNumber toDoub = new FloatNumber(true, 764588, 3);
-        System.out.println("Метод toDouble "+ toDoub.toDouble());
-        fl.fromDouble(902.387);
-        //fl.toDouble();
-        System.out.println("Метод fromDouble toDouble "+fl.toDouble());
+        System.out.println("Проба toString " + new FloatNumber(true, 645602, 3));
+        FloatNumber toDoub = new FloatNumber(true, 355304, 3);
+       // toDoub.toDouble();
+        System.out.println("Метод toDouble " + toDoub.toDouble());
+        fl.fromDouble(2.80840082775E8);
+       // fl.toDouble();
+        System.out.println("Метод fromDouble toDouble " + fl.toDouble());
 
         FloatNumber toNeg = new FloatNumber(true, 86378, 2);
         toNeg.negative();
-        System.out.println("Метод negative "+toNeg);
-       double res= 93810e2+85699e3;
-        System.out.println("Проверяем комп "+res);
+        System.out.println("Метод negative " + toNeg);
+        double res = 93810e2 + 85699e3;
+        System.out.println("Проверяем комп " + res);
         FloatNumber one = new FloatNumber(true, 93810, 2);
         FloatNumber two = new FloatNumber(true, 85699, 3);
-        System.out.println("Плюс " +one.add(two));
+        System.out.println("Плюс " + one.add(two));
         FloatNumber three = new FloatNumber(true, 939156, 3);
-        FloatNumber four =  new FloatNumber(true, 759963, 3);
-        System.out.println("Минус "+ three.sub(four));
-        double minus = 939156e3-759963e3;
-        System.out.println("Комп минус"+minus);
-        //fl.fromDouble(902.387);
+        FloatNumber four = new FloatNumber(true, 759963, 3);
+        System.out.println("Минус " + three.sub(four));
+        double minus = 939156e3 - 759963e3;
+        System.out.println("Комп минус" + minus);
+        fl.fromDouble(902.387);
 
-       // System.out.println(fl.toDouble());
+        System.out.println(fl.toDouble());
 
 
     }
