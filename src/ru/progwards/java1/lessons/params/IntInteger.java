@@ -6,11 +6,6 @@ public class IntInteger extends AbsInteger{
         return Integer.toString(value);
     }
 
-//    public String toString() {
-//        return "IntInteger("+ this.value +
-//                ')';
-//    }
-
     IntInteger(int value){
         super(value);
     }
