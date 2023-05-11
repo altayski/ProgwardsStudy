@@ -88,10 +88,6 @@ public class FloatNumber {
             exp--;
             correction--;
         }
-
-        System.out.println("Знак: " + sign);
-        System.out.println("Мантисса: " + mantissa);
-        System.out.println("Экспонента: " + exp);
     }
 
     double toDouble() {
@@ -109,7 +105,7 @@ public class FloatNumber {
             }
         }
         double res = mantissa * todouble;
-         return Math.floor(res * 1000) / 1000;
+         return Math.floor(res * 10000) / 10000;
 
     }
 
@@ -144,7 +140,6 @@ public class FloatNumber {
             index++;
         }
         mantissa = Long.parseLong(mantissaBuild.toString());
-        System.out.println("Знак " + sign + "\n" + "Мантисса " + mantissa + "\n" + "Экспонента " + exp + "\n");
     }
 
     void negative() {
@@ -169,19 +164,19 @@ public class FloatNumber {
         FloatNumber a = new FloatNumber(this.sign, this.mantissa, this.exp);
         FloatNumber b = new FloatNumber(num.sign, num.mantissa, num.exp);
         b.negative();
-
         return a.add((b));
     }
 
     public static void main(String[] args) {
         FloatNumber fl = new FloatNumber();
+        FloatNumber fl1 = new FloatNumber();
         System.out.println("Проба toString " + new FloatNumber(true, 645602, 3));
         FloatNumber toDoub = new FloatNumber(true, 355304, 3);
-       // toDoub.toDouble();
         System.out.println("Метод toDouble " + toDoub.toDouble());
-        fl.fromDouble(2.80840082775E8);
-       // fl.toDouble();
+        fl.fromDouble(1.090175605751E9);
+        fl1.fromDouble(2.80840082775E8);
         System.out.println("Метод fromDouble toDouble " + fl.toDouble());
+        System.out.println("Метод fromDouble toDouble " + fl1.toDouble());
 
         FloatNumber toNeg = new FloatNumber(true, 86378, 2);
         toNeg.negative();
@@ -199,7 +194,5 @@ public class FloatNumber {
         fl.fromDouble(902.387);
 
         System.out.println(fl.toDouble());
-
-
     }
 }

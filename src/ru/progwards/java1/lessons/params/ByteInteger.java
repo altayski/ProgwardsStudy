@@ -4,11 +4,6 @@ public class ByteInteger extends AbsInteger{
     public ByteInteger(byte value) {
         super(value);
     }
-//    public String toString() {
-//        return "ByteInteger(" +
-//                  this.value +
-//                ')';
-//    }
 
     @Override
     public String toString() {
