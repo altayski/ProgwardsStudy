@@ -5,13 +5,13 @@ import java.util.Date;
 
 public class DateDiff {
     private static class TimeDifference {
-        private int years;
-        private int month;
-        private int days;
-        private int hours;
-        private int minutes;
-        private int seconds;
-        private int millis;
+        private final int years;
+        private final int month;
+        private final int days;
+        private final int hours;
+        private final int minutes;
+        private final int seconds;
+        private final int millis;
 
         public int getYears() {
             return years;
@@ -62,13 +62,13 @@ public class DateDiff {
     }
 
     public static void timeToBirthday(Date now, Date birthday) {
-        TimeDifference timeDifference = calculateYearMonthDays(now, birthday);//находим период: годы, месяцы, дни
-        System.out.println("До дня рождения " + timeDifference.getYears() + " лет " + timeDifference.getMonth() + " месяцев, " + timeDifference.getDays() + " дней, " + timeDifference.getHours() + " часов, "
+        TimeDifference timeDifference = calculateYearMonthDays(now, birthday);
+        System.out.println("До дня рождения " + "лет " + timeDifference.getMonth() + " месяцев, " + timeDifference.getDays() + " дней, " + timeDifference.getHours() + " часов, "
                 + timeDifference.getMinutes() + " минут, " + timeDifference.getSeconds() + " секунд, " + timeDifference.getMillis() + " миллисекунд");
     }
 
     private static TimeDifference calculateYearMonthDays(Date one, Date two) {//калькулятор на годы, месяцы, дни
-        int yearsBetween = 0, monthBetween = 0, daysBetween = 0, hourBetween = 0, minutesBetween = 0, secondsBetween = 0, millisBetween = 0;
+        int yearsBetween=0, monthBetween=0, daysBetween, hourBetween, minutesBetween, secondsBetween, millisBetween;
         Calendar one1 = Calendar.getInstance();
         one1.setTime(one);
         Calendar two1 = Calendar.getInstance();
@@ -96,7 +96,7 @@ public class DateDiff {
         int dayOfMonth = one1.get(Calendar.DAY_OF_MONTH);
 
         daysBetween = daysInMonth - dayOfMonth + two1.get(Calendar.DAY_OF_MONTH);
-        if (daysBetween < dayOfMonth) {
+        if (daysBetween < daysInMonth) {
             monthBetween -= 1;
         }
         if (daysBetween > daysInMonth) {
@@ -120,9 +120,17 @@ public class DateDiff {
             minutesBetween = (60 + minTwo) - minOne;
             hourBetween -= 1;
         }
+
         int secOne = one1.get(Calendar.SECOND);
         int secTwo = two1.get(Calendar.SECOND);
         secondsBetween = secTwo - secOne;
+        int oneMillis = one1.get(Calendar.MILLISECOND);
+        int twoMillis = two1.get(Calendar.MILLISECOND);
+        millisBetween = twoMillis - oneMillis;
+        if(millisBetween<0){
+            millisBetween = (1000+twoMillis)-oneMillis;
+            secondsBetween-=1;
+        }
         if (secondsBetween < 0) {
             secondsBetween = (60 + secTwo) - secOne;
             minutesBetween = minutesBetween - 1;
@@ -144,48 +152,42 @@ public class DateDiff {
                 yearsBetween = yearsBetween - 1;
             }
 
-        int oneMillis = one1.get(Calendar.MILLISECOND);
-        int twoMillis = two1.get(Calendar.MILLISECOND);
-        millisBetween = twoMillis - oneMillis;
-
         return new TimeDifference(yearsBetween, monthBetween, daysBetween, hourBetween, minutesBetween, secondsBetween, millisBetween);
     }
 
     public static void averageTime(Date[] events) {
         int sumYears = 0, sumMonth = 0, sumDays = 0, sumHours = 0, sumMinutes = 0, sumSeconds = 0, sumMillis = 0;
         int max = events.length;
-        int count = max - 1;
+        int count = max-1;
         TimeDifference timeDifference;
 
-        for (int i = 0, j = 1; i < max - 1 && j < max; j++, i++) {
-            timeDifference = calculateYearMonthDays(events[i], events[j]);
-            sumYears += timeDifference.getYears();
-            sumMonth += timeDifference.getMonth();
-            sumDays += timeDifference.getDays();
-            sumHours += timeDifference.getHours();
-            sumMinutes += timeDifference.getMinutes();
-            sumSeconds += timeDifference.getSeconds();
-            sumMillis += timeDifference.getMillis();
+            timeDifference = calculateYearMonthDays(events[0], events[max-1]);
+            sumYears = timeDifference.getYears();
+            sumMonth = timeDifference.getMonth();
+            sumDays = timeDifference.getDays();
+            sumHours = timeDifference.getHours();
+            sumMinutes = timeDifference.getMinutes();
+            sumSeconds = timeDifference.getSeconds();
+            sumMillis = timeDifference.getMillis();
 
-        }
 
-        if (sumSeconds > 60) {
-            sumMinutes += sumSeconds / 60;
-            sumSeconds %= 60;
-        }
-        if (sumMinutes > 60) {
-            sumHours += sumMinutes / 60;
-            sumMinutes %= 60;
-        }
-        if (sumHours > 24) {
-            sumDays += sumHours / 24;
-            sumHours %= 24;
-        }
-        if (sumDays > 31) {
-            sumMonth += sumDays / 31;
-            sumDays %= 31;
-        }
 
+//        if (sumSeconds > 60) {
+//            sumMinutes += sumSeconds / 60;
+//            sumSeconds %= 60;
+//        }
+//        if (sumMinutes > 60) {
+//            sumHours += sumMinutes / 60;
+//            sumMinutes %= 60;
+//        }
+//        if (sumHours > 24) {
+//            sumDays += sumHours / 24;
+//            sumHours %= 24;
+//        }
+//        if (sumDays > 31) {
+//            sumMonth += sumDays / 31;
+//            sumDays %= 31;
+//        }
 
         int averageYear = sumYears / count;//среднее кол-во лет до целого
         int ostYear = sumYears %count;//остаток в годах
@@ -200,12 +202,14 @@ public class DateDiff {
         int averageDays = sumDays / count;
         int ostDays = sumDays %count;
         sumHours += ostDays * 24;
-
-
-        long averageHours = Math.round(sumHours * 1.0 / count);
-        long averageMinutes = Math.round(sumMinutes * 1.0 / count);
-        long averageSeconds = Math.round(sumSeconds * 1.0 / count);
-        long averageMillis = Math.round(sumMillis * 1.0 / count);
+        int averageHours = sumHours/count;
+        int ostHours = sumHours % count;
+        sumMinutes+=ostHours*60;
+        int averageMinutes = sumMinutes / count;
+        int ostMinutes = sumMinutes % count;
+        sumSeconds+=ostMinutes*60;
+        int averageSeconds = sumSeconds /count;
+        int averageMillis = sumMillis / count;
 
         System.out.println("Среднее время между событиями " + averageYear + " лет, " + averageMonth + " месяцев, "
                 + averageDays + " дней, " + averageHours + " часов, " + averageMinutes + " минут, " + averageSeconds +
@@ -216,20 +220,23 @@ public class DateDiff {
 
 
     public static void main(String[] args) {
-        Date one = new Date(1973, 2, 1, 9, 37, 46);
-        Date two = new Date(2083, 11, 17, 12, 33, 5);
+        Date one = new Date(2019, Calendar.MARCH, 21, 8, 6, 48);
+        Date two = new Date(2024, Calendar.FEBRUARY, 20, 17, 35, 53);
+        Date one1 = new Date(1973, Calendar.MARCH,1,9,37,46);
+        Date two1 = new Date(2083, Calendar.DECEMBER,17, 12,33,5);
         System.out.println("Расчет между датами: ");
         //timeBetween(one, two);
-        Date date = new Date(123, 4, 19, 14, 46, 11);
+      //  timeBetween(one1,two1);
+        Date date = new Date(123, Calendar.MAY, 29, 10, 10, 13);
         Date dateNow = new Date();
-        Date birth = new Date(95, 3, 2, 7, 54, 29);
+        Date birth = new Date(99, Calendar.OCTOBER, 25, 13, 4, 37);
 
         Date testFrom = new Date(2021, 0, 0, 0, 0, 0);
         Date testFin = new Date(2022, 1, 0, 0, 0, 0);
         // System.out.print("Расчёт до дня рождения: ");
        // timeBetween(testFrom, testFin);
         //timeToBirthday(dateNow, birth);
-         timeToBirthday(date, birth);
+        // timeToBirthday(date, birth);
 
 
         Date seul = new Date(88, 8, 17, 10, 0, 15);
@@ -242,14 +249,20 @@ public class DateDiff {
         Date rio = new Date(116, 7, 5, 19, 30, 11);
         Date today = new Date();
         Date[] olympic = {seul, barselona, atlanta, sydnei, athens, peking, london, rio};
-       // averageTime(olympic);
+        //averageTime(olympic);
 
         Date june = new Date(1976, Calendar.JUNE, 24, 9, 9, 45);
         Date october = new Date(1983, Calendar.OCTOBER, 24, 18, 8, 14);
         Date september = new Date(1991, Calendar.SEPTEMBER, 12, 5, 3, 0);
         Date may = new Date(2006, Calendar.MAY, 26, 16, 51, 48);
         Date[] test = {june, october, september, may};
-        averageTime(test);
-        //  timeBetween(june,october);
+         averageTime(test);
+        //  timeBetween(june,may);
+        Date january = new Date(72,Calendar.JANUARY,3,19,6,32);
+        Date august =  new Date(82,Calendar.AUGUST,13,20,20,52);
+        Date february = new Date(96, Calendar.FEBRUARY,25,14,23,10);
+        Date march = new Date(104,Calendar.MARCH,1,12,8,50);
+        Date[] timeTest = {january,august,february,march};
+        averageTime(timeTest);
     }
 }
