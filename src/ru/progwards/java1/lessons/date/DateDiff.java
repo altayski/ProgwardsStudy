@@ -9,98 +9,41 @@ import java.util.Date;
 
 public class DateDiff {
     private static class TimeDifference {
-        private final int years;
-        private final int month;
-        private final int days;
-        private final int hours;
-        private final int minutes;
-        private final int seconds;
-        private final int millis;
-
-        public int getYears() {
-            return years;
+         static LocalDateTime refresh;
+        static void setRefresh(LocalDateTime refresh) {
+            TimeDifference.refresh = refresh;
+        }
+        static LocalDateTime getRefresh() {
+            return TimeDifference.refresh;
         }
 
-        public int getMonth() {
-            return month;
-        }
-
-        public int getDays() {
-            return days;
-        }
-
-        public int getHours() {
-            return hours;
-        }
-
-        public int getMinutes() {
-            return minutes;
-        }
-
-        public int getSeconds() {
-            return seconds;
-        }
-
-        public int getMillis() {
-            return millis;
-        }
-
-        TimeDifference(int years, int month, int days, int hours, int minutes, int seconds, int millis) {
-            this.years = years;
-            this.month = month;
-            this.days = days;
-            this.hours = hours;
-            this.minutes = minutes;
-            this.seconds = seconds;
-            this.millis = millis;
-        }
     }
 
     public static void timeBetween(Date date1, Date date2) {
-        TimeDifference timeDifference;
-        timeDifference = calculate(convert(date1), convert(date2));
-        System.out.println("Между date1 и date2 "
-                + timeDifference.getYears() + " лет, "
-                + timeDifference.getMonth() + " месяцев, "
-                + timeDifference.getDays() + " дней, "
-                + timeDifference.getHours() + " часов, "
-                + timeDifference.getMinutes() + " минут, "
-                + timeDifference.getSeconds() + " секунд, "
-                + timeDifference.getMillis() + " миллисекунд");
+        System.out.println("Между date1 и date2 " + calculateYears(convert(date1),convert(date2))+" лет, "+calculate(convert(date1),convert(date2)));
+
     }
 
     public static void timeToBirthday(Date now, Date birthday) {
-        TimeDifference timeDifference;
-        timeDifference = calculate(convert(now), convert(birthday));
-        System.out.println("До дня рождения "
-                + timeDifference.getMonth() + " месяцев, "
-                + timeDifference.getDays() + " дней, "
-                + timeDifference.getHours() + " часов, "
-                + timeDifference.getMinutes() + " минут, "
-                + timeDifference.getSeconds() + " секунд, "
-                + timeDifference.getMillis() + " миллисекунд");
+          calculateYears(convert(now),convert(birthday));
+        System.out.println("До дня рождения "+calculate(convert(now),convert(birthday)));
+
     }
 
     private static LocalDateTime convert(Date date) {
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
-    private static TimeDifference calculate(LocalDateTime start, LocalDateTime end) {
-        int yearsBetween = 0, monthBetween = 0, daysBetween = 0, hourBetween = 0, minutesBetween = 0, secondsBetween = 0, millisBetween = 0;
-        boolean isAfter = start.isAfter(end);
-        while (start.isAfter(end) == isAfter) {
-            yearsBetween++;
-            start = start.plusYears(isAfter ? -1 : 1);
-        }
-        yearsBetween -= isAfter ? 0 : 1;
-        start = start.plusYears(isAfter ? 0 : -1);
+    private static String calculate(LocalDateTime start, LocalDateTime end) {
+        int monthBetween = 0, daysBetween = 0, hourBetween = 0, minutesBetween = 0, secondsBetween = 0, millisBetween = 0;
         int startDay = start.getDayOfMonth();
+        start = TimeDifference.getRefresh();
         while (start.isBefore(end)) {
             monthBetween++;
             start = start.plusMonths(1);
         }
         int finishDay = start.getDayOfMonth();
-        start = start.minusMonths(1).plusDays(startDay-finishDay);
+        start = start.minusMonths(1).plusDays(startDay - finishDay);
         monthBetween--;
 
         while (start.isBefore(end)) {
@@ -129,11 +72,12 @@ public class DateDiff {
         secondsBetween--;
         int st = start.getNano() / 1000000;
         int ed = end.getNano() / 1000000;
-        millisBetween = whereAreMillis(st, ed);
-        return new TimeDifference(yearsBetween, monthBetween, daysBetween, hourBetween, minutesBetween, secondsBetween, millisBetween);
+        millisBetween = calculateMillis(st, ed);
+        return monthBetween + " месяцев, " + daysBetween + " дней, " + hourBetween+ " часов, " + minutesBetween+ " минут, " + secondsBetween + " секунд, "
+                + millisBetween + " миллисекунд";
     }
 
-    private static int whereAreMillis(int start, int end) {
+    private static int calculateMillis(int start, int end) {
 
         int milllisBetween = 0;
         if (end < start) {
@@ -145,9 +89,22 @@ public class DateDiff {
         return milllisBetween;
     }
 
+    private static int calculateYears(LocalDateTime start, LocalDateTime end) {
+        int yearsBetween = 0;
+        boolean isAfter = start.isAfter(end);
+        while (start.isAfter(end) == isAfter) {
+            yearsBetween++;
+            start = start.plusYears(isAfter ? -1 : 1);
+        }
+        yearsBetween -= isAfter ? 0 : 1;
+        start = start.plusYears(isAfter ? 0 : -1);
+        TimeDifference.setRefresh(start);
+        return yearsBetween;
+
+    }
+
 
     public static void averageTime(Date[] events) {
-        TimeDifference timeDifference;
         long fromDate = events[0].toInstant().toEpochMilli();
         long fromDate2 = events[events.length - 1].toInstant().toEpochMilli();
         long difference = (fromDate2 - fromDate) / (events.length - 1);
@@ -155,16 +112,7 @@ public class DateDiff {
         Instant dateFinish = Instant.ofEpochMilli(difference);
         LocalDateTime zero = LocalDateTime.ofInstant(epo, ZoneId.of("UTC"));
         LocalDateTime fromDateTime = LocalDateTime.ofInstant(dateFinish, ZoneId.of("UTC"));
-        timeDifference = calculate(zero, fromDateTime);
-
-        System.out.println("Среднее время между событиями "
-                + timeDifference.getYears() + " лет, "
-                + timeDifference.getMonth() + " месяцев, "
-                + timeDifference.getDays() + " дней, "
-                + timeDifference.getHours() + " часов, "
-                + timeDifference.getMinutes() + " минут, "
-                + timeDifference.getSeconds() + " секунд, "
-                + timeDifference.getMillis() + " миллисекунд");
+        System.out.println("Среднее время между событиями "+ calculateYears(zero,fromDateTime)+" лет, "+calculate(zero,fromDateTime));
     }
 
 
@@ -175,15 +123,15 @@ public class DateDiff {
         Date two1 = new Date(183, Calendar.DECEMBER, 17, 12, 33, 5);
         Date september1 = new Date(198, Calendar.SEPTEMBER, 3, 17, 33, 7);
         Date april = new Date(187, Calendar.APRIL, 6, 6, 19, 21);
-        Date febr19 = new Date(2019,Calendar.FEBRUARY,21);
-        Date febr20 = new Date(2024, Calendar.FEBRUARY,20);
+        Date febr19 = new Date(2019, Calendar.FEBRUARY, 21);
+        Date febr20 = new Date(2024, Calendar.FEBRUARY, 20);
 //        Date dec30 = new Date(2022, Calendar.DECEMBER,29);
 //        Date mart5 = new Date(2023,Calendar.MARCH,5);
 //        timeBetween(dec30,mart5);
-         //timeBetween(febr19,febr20);
+        //timeBetween(febr19,febr20);
 
         //System.out.println("Расчет между датами: ");
-         //timeBetween(one1, two1);
+       // timeBetween(one1, two1);
         // timeBetween(one,two);
         // timeBetween(april,september1);
         Date date = new Date(123, Calendar.JANUARY, 1, 10, 10, 13);
@@ -197,14 +145,14 @@ public class DateDiff {
 
         Date apr95 = new Date(95, Calendar.APRIL, 2, 7, 54, 29);
         Date may23 = new Date(123, Calendar.MAY, 19, 14, 46, 11);
-        // timeToBirthday(may23,apr95);
+        timeToBirthday(may23, apr95);
 
         Date june = new Date(76, 5, 24, 9, 9, 45);
         Date october = new Date(83, 9, 24, 18, 8, 14);
         Date september = new Date(91, 8, 12, 5, 3, 0);
         Date may = new Date(106, 4, 26, 16, 51, 48);
         Date[] test1 = {june, october, september, may};
-        //averageTime(test1);
+       // averageTime(test1);
         Date january = new Date(72, 0, 3, 19, 6, 32);
         Date august = new Date(82, 8, 13, 20, 20, 52);
         Date february = new Date(96, 1, 25, 14, 23, 10);
@@ -224,11 +172,11 @@ public class DateDiff {
         //  13 ноября 2098 года, 00:04:12.034 и 20 мая 1991 года, 20:37:06.804 вывел на консоль:
         Date date1991 = new Date(91, 04, 20, 20, 37, 6);
         Date date2098 = new Date(198, 10, 13, 0, 4, 12);
-       // timeBetween(date1991,date2098);
+        // timeBetween(date1991,date2098);
         //30 сентября 2069 года, 14:12:32.228 и 17 мая 2088 года, 12:19:52.725 вывел на консоль:
         Date date2069 = new Date(169, 8, 30, 14, 12, 32);
         Date date2088 = new Date(188, 4, 17, 12, 19, 52);
-        // timeBetween(date2069, date2088);
+         timeBetween(date2069, date2088);
 
 
     }
