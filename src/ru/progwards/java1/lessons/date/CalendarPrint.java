@@ -40,6 +40,6 @@ public class CalendarPrint {
 
 
     public static void main(String[] args) {
-        printMonth(3, 2025);
+        printMonth(8, 1977);
     }
 }

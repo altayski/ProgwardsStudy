@@ -19,7 +19,9 @@ public class DateDiff {
     }
 
     public static void timeBetween(Date date1, Date date2) {
-        System.out.println("Между date1 и date2 " + calculateYears(convert(date1),convert(date2))+" лет, "+calculate(convert(date1),convert(date2)));
+        if(date1.before(date2)){
+            System.out.println("Между date1 и date2 " + calculateYears(convert(date1),convert(date2))+" лет, "+calculate(convert(date1),convert(date2)));
+        } else System.out.println("Между date1 и date2 " + calculateYears(convert(date2),convert(date1))+" лет, "+calculate(convert(date2),convert(date1)));
     }
 
     public static void timeToBirthday(Date now, Date birthday) {
@@ -113,9 +115,12 @@ public class DateDiff {
 
 
     public static void main(String[] args) {
+        Date a53 = new Date(153,3,12,11,21,23);
+        Date n90 = new Date(90,10,27,10,42,16);
+        timeBetween(a53,n90);
         Date j85 = new Date(85,6,20,15,43,2);
         Date s61 = new Date(161,8,1,22,55,1);
-        timeBetween(j85,s61);
+        timeBetween(s61,j85);
 
         Date one = new Date(119, Calendar.MARCH, 21, 8, 6, 48);
         Date two = new Date(124, Calendar.FEBRUARY, 20, 17, 35, 53);
@@ -143,7 +148,7 @@ public class DateDiff {
 
         Date apr95 = new Date(95, Calendar.APRIL, 2, 7, 54, 29);
         Date may23 = new Date(123, Calendar.MAY, 19, 14, 46, 11);
-        timeToBirthday(may23, apr95);
+        timeToBirthday(may23,apr95);
 
         Date june = new Date(76, 5, 24, 9, 9, 45);
         Date october = new Date(83, 9, 24, 18, 8, 14);
