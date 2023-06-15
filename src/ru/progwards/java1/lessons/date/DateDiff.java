@@ -113,6 +113,10 @@ public class DateDiff {
 
 
     public static void main(String[] args) {
+        Date j85 = new Date(85,6,20,15,43,2);
+        Date s61 = new Date(161,8,1,22,55,1);
+        timeBetween(j85,s61);
+
         Date one = new Date(119, Calendar.MARCH, 21, 8, 6, 48);
         Date two = new Date(124, Calendar.FEBRUARY, 20, 17, 35, 53);
         Date one1 = new Date(73, Calendar.MARCH, 1, 9, 37, 46);
@@ -125,6 +129,7 @@ public class DateDiff {
         Date mart5 = new Date(2023,Calendar.MARCH,5);
         timeBetween(dec30,mart5);
         timeBetween(febr19,febr20);
+       // 20 июля 1985 года, 15:43:02.827 и 01 сентября 2061 года, 22:55:01.161 вывел на консоль:
 
         System.out.println("Расчет между датами: ");
         timeBetween(one1, two1);

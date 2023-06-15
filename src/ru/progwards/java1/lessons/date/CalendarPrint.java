@@ -7,7 +7,7 @@ public class CalendarPrint {
 
     public static void printMonth(int month, int year) {
         String[] monthArray = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
-        String[] days = {"пн", "вт", "ср", "чт", "пт", "сб", "вс"};
+        String[] days = {"ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"};
         Calendar cal = Calendar.getInstance();
         cal.set(year, month - 1, 1);
 
@@ -40,6 +40,6 @@ public class CalendarPrint {
 
 
     public static void main(String[] args) {
-        printMonth(5, 2022);
+        printMonth(3, 2025);
     }
 }
